@@ -4,7 +4,7 @@ import XCPlayground
 import PlaygroundSupport
 import QuartzCore
 
-public class SimonController {
+open class SimonController {
     public enum Squares:UInt8 {case Red=0, Green, Blue, Yellow} //makes things easy
     private var ppage:PlaygroundPage? //page, mostly just for reference
     private var startBtn:UILabel? //start button
@@ -23,6 +23,7 @@ public class SimonController {
     public static var MEDIUM = [Squares.Blue,Squares.Yellow,Squares.Green,Squares.Red,Squares.Green,Squares.Yellow,Squares.Yellow,Squares.Green]
     public static var HARD = [Squares.Yellow,Squares.Green,Squares.Green,Squares.Red,Squares.Red,Squares.Green,Squares.Blue,Squares.Green,Squares.Yellow,Squares.Blue,Squares.Red,Squares.Blue,Squares.Yellow,Squares.Green,Squares.Green,Squares.Blue]
     //init, places all of the objects on the UIView and configures all input
+    public init () {}
     public init (page:PlaygroundPage) {
         let containerView = UIView (frame: CGRect (x: 0.0, y: 0.0, width: 700.0, height: 700.0))
         PlaygroundPage.current.liveView = containerView
@@ -94,7 +95,7 @@ public class SimonController {
         print ("SimonController loaded.")
     }
     //used to load a sequence
-    public func loadSequence (seq: [Squares])  {
+    open func loadSequence (seq: [Squares])  {
         print ("new sequence loaded.")
         self.sequence = seq
     }
@@ -191,7 +192,7 @@ public class SimonController {
         animations.removeFirst() ()
     }
     //displays sequence
-    @objc public func showPattern (_ recognizer: UITapGestureRecognizer) {
+    @objc open func showPattern (_ recognizer: UITapGestureRecognizer) {
         if sequence.isEmpty && !isDisplaying { return }
         if isWaiting { //no cheating
             sequence = []
@@ -214,7 +215,7 @@ public class SimonController {
         startSequence ()
     }
     
-    @objc public func pressedR (_ recognizer: UITapGestureRecognizer) {
+    @objc open func pressedR (_ recognizer: UITapGestureRecognizer) {
         if isWaiting { //only do stuff when looking for input
             print ("_redBtn tap detected")
             self.__pingR ()
@@ -230,7 +231,7 @@ public class SimonController {
         }
     }
     
-    @objc public func pressedG (_ recognizer: UITapGestureRecognizer) {
+    @objc open func pressedG (_ recognizer: UITapGestureRecognizer) {
         if isWaiting { //only do stuff when looking for input
             print ("_greenBtn tap detected")
             self.__pingG ()
@@ -246,7 +247,7 @@ public class SimonController {
         }
     }
     
-    @objc public func pressedB (_ recognizer: UITapGestureRecognizer) {
+    @objc open func pressedB (_ recognizer: UITapGestureRecognizer) {
         if isWaiting { //only do stuff when looking for input
             print ("_blueBtn tap detected")
             self.__pingB ()
@@ -262,7 +263,7 @@ public class SimonController {
         }
     }
     
-    @objc public func pressedY (_ recognizer: UITapGestureRecognizer) {
+    @objc open func pressedY (_ recognizer: UITapGestureRecognizer) {
         if isWaiting { //only do stuff when looking for input
             print ("_yellowBtn tap detected")
             self.__pingY ()
@@ -278,7 +279,7 @@ public class SimonController {
         }
     }
     
-    private func success () {
+    open func success () {
         print ("correct pattern entered.")
         self.correct?.backgroundColor = UIColor.green
         UIView.animate (withDuration: 1.0, delay: 0.5,
@@ -288,7 +289,7 @@ public class SimonController {
         isWaiting = false
     }
     
-    private func fail () {
+    open func fail () {
         print ("incorrect pattern entered.")
         self.correct?.backgroundColor = UIColor.red
         UIView.animate (withDuration: 1.0, delay: 0.5,
@@ -297,7 +298,7 @@ public class SimonController {
         })
     }
     
-    public static func randomSequence (of:Int) -> [Squares] {
+    open func randomSequence (of:Int) -> [Squares] {
         var seq:[Squares] = []
         print ("-----creating random sequence-----")
         for _ in 1...of {
@@ -320,6 +321,19 @@ public class SimonController {
         }
         print ("-----random sequence created------")
         return seq
+    }
+    
+    private func oneTimePing (_ sq:Squares) {
+        switch (sq) {
+            case .Red:
+                self.__pingR ()
+            case .Green:
+                self.__pingG ()
+            case .Blue:
+                self.__pingB ()
+            case .Yellow:
+                self.__pingY ()
+        }
     }
     
 }
