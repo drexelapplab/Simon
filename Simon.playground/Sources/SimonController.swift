@@ -14,15 +14,17 @@ open class SimonController {
     open var yellow:UIView? //yellow box
     open var sequence:[Squares] = []
     open var input:[Squares] = [] //user input
-    var animations:[() -> Void] = [] //animation queue
+    private var animations:[() -> Void] = [] //animation queue
     open var isDisplaying:Bool = false
     open var isWaiting:Bool = false
     //example sequences
     public static var EASY = [Squares.Red, Squares.Green, Squares.Blue, Squares.Yellow]
     public static var MEDIUM = [Squares.Blue,Squares.Yellow,Squares.Green,Squares.Red,Squares.Green,Squares.Yellow,Squares.Yellow,Squares.Green]
     public static var HARD = [Squares.Yellow,Squares.Green,Squares.Green,Squares.Red,Squares.Red,Squares.Green,Squares.Blue,Squares.Green,Squares.Yellow,Squares.Blue,Squares.Red,Squares.Blue,Squares.Yellow,Squares.Green,Squares.Green,Squares.Blue]
+
+    public init () {} //benign
     //init, places all of the objects on the UIView and configures all input
-    public init () {}
+
     public init (page:PlaygroundPage) {
         let containerView = UIView (frame: CGRect (x: 0.0, y: 0.0, width: 700.0, height: 700.0))
         PlaygroundPage.current.liveView = containerView
@@ -164,28 +166,28 @@ open class SimonController {
         isDisplaying = false
         isWaiting = true
     }
-    //adds red-ping disply animation to queue
-    public func addRedToSequence () {
+    //adds red-ping display animation to queue
+    public func addRedToQueue () {
         print ("red")
         animations.append (__pingR)
     }
-    //adds green-ping disply animation to queue
-    public func addGreenToSequence () {
+    //adds green-ping display animation to queue
+    public func addGreenToQueue () {
         print ("green")
         animations.append (__pingG)
     }
-    //adds blue-ping disply animation to queue
-    public func addBlueToSequence () {
+    //adds blue-ping display animation to queue
+    public func addBlueToQueue () {
         print ("blue")
         animations.append (__pingB)
     }
-    //adds yellow-ping disply animation to queue
-    public func addYellowToSequence () {
+    //adds yellow-ping display animation to queue
+    public func addYellowToQueue () {
         print ("yellow")
         animations.append (__pingY)
     }
     //used to start the animation chain going.
-    public func startSequence () {
+    public func startDisplayingSequence () {
         print ("starting to display sequence...")
         animations.append (__end)
         animations.removeFirst() ()
@@ -201,17 +203,17 @@ open class SimonController {
         isDisplaying = true
         for i in self.sequence {
             if i == .Red {
-                addRedToSequence ()
+                addRedToQueue ()
             } else if i == .Green {
-                addGreenToSequence ()
+                addGreenToQueue ()
             } else if i == .Blue {
-                addBlueToSequence ()
+                addBlueToQueue ()
             } else { //has to be yellow
-                addYellowToSequence ()
+                addYellowToQueue ()
             }
         }
         print ("----------Pattern Loaded-----------")
-        startSequence ()
+        startDisplayingSequence ()
     }
     
     @objc open func pressedR (_ recognizer: UITapGestureRecognizer) {
