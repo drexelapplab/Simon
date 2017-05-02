@@ -42,7 +42,7 @@ PlaygroundPage.current.liveView = screen
         let screen = UIView (frame: frame)
         PlaygroundPage.current.liveView = screen
 /*:
-Now that the `screen` is made, we need to add the squares. The `variables` for the squares are already created and are called `red`, `green`, `blue`, and `yellow` but we still to create them. Lets start by making origin points for each square.
+Now that the `screen` is made, we need to add the squares. The `variables` for the squares are already created and are called `red`, `green`, `blue`, and `yellow` but we still make their frames. Lets start by making origin points for each square.
 ````
 let redOrigin
 let greenOrigin
