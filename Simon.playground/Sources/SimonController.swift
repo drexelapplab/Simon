@@ -157,6 +157,7 @@ open class SimonController {
     }
     //@ignore
     private func __end () {
+        print ("*****************************")
         isDisplaying = false
         isWaiting = true
     }
@@ -182,6 +183,7 @@ open class SimonController {
     }
     //used to start the animation chain going.
     public func startDisplayingSequence () {
+        print ("*****************************")
         animations.append (__end)
         animations.removeFirst () ()
     }

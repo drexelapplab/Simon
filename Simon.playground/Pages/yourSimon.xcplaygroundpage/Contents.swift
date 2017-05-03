@@ -93,7 +93,9 @@ Now that the sqaures are ready all setup to their starting configurations, we ne
 1. write a function to run when the square is pressed. 
 2. create a `UITapGestureRecognizer` to detect when a square is tapped. 
 3. add the `UITapGestureRecognizer` to a sqaure so it can respond to being tapped. 
-We will be writing the function to run when the square is pressed later on in this tutorial, but for now we can do steps 2 and 3. A `UITapGestureRecognizer` is made with the following **command**: `UITapGestureRecognizer (target:, action:)`. The target is `self` an the action is the name of the function we want wrapped up so the `UITapGestureRecognizer` can use it. We added a `UITapGestureRecognizer` to our button with this **command**: `addGestureRecognizer(Gesture)`. Doing steps 2 and 3 for the red square would look like this. 
+\
+\
+We will be writing the function to run when the square is pressed later on in this tutorial, but for now we can do steps 2 and 3. A `UITapGestureRecognizer` is made with the following **command**: `UITapGestureRecognizer (target:, action:)`. The target is `self` an the action is the name of the function we want wrapped up so the `UITapGestureRecognizer` can use it. We added a `UITapGestureRecognizer` to our button with this **command**: `addGestureRecognizer(Gesture)`. Doing steps 2 and 3 for the red square would look like this.
 ````
 let tapRed = UITapGestureRecognizer(target: self,
                                 action:#selector (self.pressedR (_:)))
@@ -148,6 +150,8 @@ Here is where we will code the action of the `UITapGestureRecognizer` for `self.
 1. animate to tell user it was pressed. 
 2. add it's color to the user input. 
 3. check if the user-entered input is done and if so, if it is correct or not.
+\
+\
 For step 1, the **command** to animate a square is `self.oneTimePing (Square)`. To animate the red square, it would look like this. 
 ````
 self.oneTimePing (Squares.Red)
@@ -278,7 +282,7 @@ for i in lower...upper {// "{" starts the for-loop
 ````
 Here, `lower...upper` is a `range`. A `range` is a list of numbers that can be looped through. The **command**: `1...5` would produce the `range` `[1, 2, 3, 4, 5]`. In the space below, write a *for-loop* that loops through the `range` `1...of`.
  */
-        //write your for-loop here
+        //start your for-loop here
             var t:Squares //will hold the random Square
 /*:
 ## Random Numbers
