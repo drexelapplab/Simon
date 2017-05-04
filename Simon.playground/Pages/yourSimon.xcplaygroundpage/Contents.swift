@@ -175,7 +175,7 @@ self.input.append (Squares.Red)
             //add Square.Red to the input array here
 /*:
 ## If-Statements
-For the last step we will need to tell the computer to use some logic. A computer can be instructed to run code only if a specified condition is true or false. We do this by making an *if-statement*, which looks like this.
+For the last step we will need to tell the computer to use some logic. A computer can be instructed to run code only if a specified condition is **true** or **false**. We do this by making an *if-statement*, which looks like this.
 ````
 if (condition) {
     (code)
@@ -284,7 +284,7 @@ Now we need a way to queue up each animation for the given square. To add the an
         startDisplayingPattern () //start to display the animations
     }
 /*:
- # randompattern
+ # randomPattern
 This code will generate a random pattern of Squares. `of` is the number of Sqaures that will be randomly generated.
  */
     override func randomPattern (of:Int) -> [Squares] {
