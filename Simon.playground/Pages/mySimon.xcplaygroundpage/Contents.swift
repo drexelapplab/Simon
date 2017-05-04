@@ -8,7 +8,7 @@ import PlaygroundSupport
 
 var simon = SimonController (page: PlaygroundPage.current)
 
-var seq = simon.randomSequence(of: 4)
+var seq = simon.randomPattern (of: 4)
 
-simon.loadSequence(seq: seq)
+simon.loadSequence (seq: seq)
 
