@@ -8,23 +8,25 @@ class yourSimonController: SimonController {
  # Simon
  ### Here, you will be learning how to make the game Simon.
  - - - 
- ## Init
+ # Init
+This code is run at the start of your game and is used to create the screen along with place all the squares and other buttons.
  */
     override init (page:PlaygroundPage) {
         super.init ()
 /*:
-## CGPoint and CGSize
- First, We need to make a screen for our game to take place in. In order to make a screen we need two things, a center point and a size for the screen. In Swift, a point is called a `CGPoint` and is created with this **command**: `CGPoint (x:,y:)`. Sizes are called `CGSize` and are created with this **command**: `CGSize (width:,height:)`. Here is how to would make a center point and size for our screen.
+## Making a Screen
+ First, We need to make a screen for our game. In order to make a screen we need to know the size of the screen and where to put the screen. A point is called a `CGPoint` and is created with this **command**: `CGPoint (x:,y:)`. Sizes are called `CGSize` and are created with this **command**: `CGSize (width:,height:)`. Here is how to make a point and size for our screen.
 ````
-var origin = CGPoint (x:0.0, y:0.0) 
-var size = CGSize (width:700.0, height: 700.0)
+var origin = CGPoint (x:0, y:0)
+var size = CGSize (width:700, height: 700)
  ````
  */
-        let origin = CGPoint (x:0.0, y:0.0) //center point
-        let size = CGSize (width:700.0, height: 700.0) //size of screen
+        let origin = CGPoint (x:0, y:0) //origin point
+        let size = CGSize (width:700, height: 700) //size of screen
+        
 /*:
-Note that the keyword `let` is a different color, so is `CGPoint` and `0.0`. The color for `let` is the computer recognizing that you are telling the computer to remember a constant `variable`. A `variable` is a peice of memory that stores a `value` and constant means that you cannot change it after it is made. The color of `CGPoint` is the computer recognizing that you are calling a `function`. A `function` is a task for the computer to do, in this case make a `CGPoint`. The color for `0.0` is the computer recognizing that are you creating a number. When the computer recognizes something it will change it's color, this is to help programmers, like you, read their code more easily.
-## CGRect
+
+## Sizing a Screen
 Now we need to make the frame for the screen. A frame is called a `CGRect` and is created by calling the `function` `CGRect (CGPoint, CGSize)`.
 ````
 var frame = CGRect (origin: origin, size: size)
@@ -32,8 +34,8 @@ var frame = CGRect (origin: origin, size: size)
 */
         let frame = CGRect (origin: origin, size: size)
 /*:
-## UIView
-All thats left to do is make the screen and tell the computer to display it. A screen is called a `UIView` and is created by calling the `function` `UIView (frame:)`. We tell the computer to display the `screen` with the following **command**: `PlaygroundPage.current.LiveView = screen`.
+## Viewing a Screen
+All thats left to do is make the screen and tell the computer to display it. A screen is called a `UIView` and is created by calling the `function` `UIView (frame:)`. We tell the computer to display the screen with the following **command**: `PlaygroundPage.current.LiveView = screen`.
 ````
 var screen = UIView (frame:frame)
 PlaygroundPage.current.liveView = screen
@@ -49,19 +51,19 @@ let greenOrigin
 let blueOrigin
 let yellowOrigin
 ````
-You can set them to `CGPoint (x:0.0, y:0.0)` and change them later once they are displayed.
+You can set them to `CGPoint (x:0, y:0)` and change them later once they are displayed.
 */
         //Create origins here
 /*:
-The next step is to make the `CGSize` for the squares, because all the squares are the same size, we only need one. I suggest `CGSize (width:200.0, height:200.0)`.
+The next step is to make the `CGSize` for the squares, because all the squares are the same size, we only need one. I suggest `CGSize (width:200, height:200)`.
 ````
 let squareSize
 ````
 */
         //make squareSize here
 /*:
-## Adding Subviews
-Now, all thats left is to make `CGRect`s and `UIView`s for the squares and then display them. If we want to access the `variable` for the red square, we can do it with the **command**: `self.red`. If we wanted to access the green sqaure instead, we would use `self.green`. Adding a new `UIView` to an already existing screen is done with the following **command**: `screen.addSubview (UIView)`. Here is how the above steps would look like, try making them for the other 3 squares too.
+## Adding to a Screen
+Now, all thats left is to make `CGRect`s and `UIView`s for the squares and then display them. If we want to access the `variable` for the red square, we can do it with the **command**: `self.red`. If we wanted to access the green sqaure instead, we would use `self.green`. There are four squares, red, green, blue, yellow. Adding a new `UIView` to an already existing screen is done with the following **command**: `screen.addSubview (UIView)`. Here is how the above steps would look like, try making them for the all the squares.
 ````
 let redRect = CGRect (origin:redOrigin, size:squareSize)
 self.red = UIView (frame:redRect)
@@ -70,7 +72,7 @@ screen.addSubview (self.red!)
 */
         //finish making the squares here 
 /*:
-## UIColor
+## Changing Colors
 The squares do not show because they are black, just like the screen. You can change the color of a `UIView` with the following **command**.
 ````
 self.red?.backgroundColor = UIColor.red
@@ -83,16 +85,16 @@ Here is where you will want to go back and change the origin point of all the sq
 \
 Now that the squares are placed, they need to be dimmed in preperation for the blink animation. Here is the **command** to dim the red sqaure.
 ````
-self.red?.layer.alpha = 0.5
+self.red?.alpha = 0.5
 ````
 */
         //dim all of the squares to 0.5 here
 /*:
-## UITapGestureRecognizer
-Now that the sqaures are ready all setup to their starting configurations, we need to make the respond to touch. This will be a three step process. 
-1. write a function to run when the square is pressed. 
-2. create a `UITapGestureRecognizer` to detect when a square is tapped. 
-3. add the `UITapGestureRecognizer` to a sqaure so it can respond to being tapped. 
+## User Input
+The squares can be setup to respond to user input. This is done in three steps:
+1. Write a function to run when the square is pressed.
+2. Create a `UITapGestureRecognizer` to detect when a square is tapped.
+3. Add the `UITapGestureRecognizer` to a sqaure so it can respond to being tapped.
 \
 \
 We will be writing the function to run when the square is pressed later on in this tutorial, but for now we can do steps 2 and 3. A `UITapGestureRecognizer` is made with the following **command**: `UITapGestureRecognizer (target:, action:)`. The target is `self` an the action is the name of the function we want wrapped up so the `UITapGestureRecognizer` can use it. We added a `UITapGestureRecognizer` to our button with this **command**: `addGestureRecognizer(Gesture)`. Doing steps 2 and 3 for the red square would look like this.
@@ -106,13 +108,14 @@ Try creating and adding `UITapGestureRecognizers` for the rest of the squares. T
         let tapRed = UITapGestureRecognizer(target: self,
                                         action:#selector (self.pressedR (_:)))
         self.red?.addGestureRecognizer(tapRed)
+        self.startBtn?.isUserInteractionEnabled = true
         //create and add UITapGestureRecognizers for the rest of the squares here 
 /*:
-Pressing them will still not make them light up. This is because we have not done step 1 yet; we will do that later. We still have to make the start button and the light that tells the user if they got it correct or not. The name of the light is called correct and is accessed with `self.correct`. It is a `UIView` just like the squares, so lets make an origin and a size for it and then place it on the screen. 
+Pressing them will still not make them light up. This is because we have not done step 1 yet; we will do that later. We still have to make the start button and the light that tells the user if they got it correct or not. The name of the light is called correct and is accessed with `self.correct`. It is a `UIView` just like the squares, so lets make an origin and a size for it and then place it on the screen. Remember to change the color so you can see it.
 ````
 let correctOrigin 
 let correctSize 
-let correctCGRect
+let correctRect
 ````
  */
         //create and place self.correct here 
@@ -121,35 +124,33 @@ Now all thats left to do it make the start button. The start button is accessed 
 ````
 let startBtnOrigin 
 let startBtnSize
-let startBtnFrame 
+let startBtnRect
 ````
  */
         //create self.startBtn here and put it on the screen 
+        self.startBtn?.text = "start" //puts the text in the box
+        self.startBtn?.textAlignment = NSTextAlignment.center //makes sure text is centered
+        //below sets up the user input for startBtn
+        let sb = UITapGestureRecognizer (target: self,
+                                         action:#selector (self.showPattern (_:)))
+        self.startBtn?.addGestureRecognizer (sb)
 /*:
 The last thing we need to do here is setup the `startBtn` so that it shows the pattern of squares lighting up. Just like with making the animations for the squares there are 3 steps. We will do the last 2 here. The name of the `functions` that shows the pattern is called `showPattern` and we will make it later. Setup the `UITapGestureRecognizer` for `startBtn` below.
  */
         //setup UITapGestureRecognizer for startBtn here
     }
 /*:
- ## loadSequence 
- */
-    override func loadSequence (seq: [Squares]) {
-/*:
-This function will load a new sequence of squares to the controller. the sequence can be accessed by `self.sequence` and should be assigned to `seq`.
- */
-        //assign self.sequence to seq here.
-    }
-/*:
- ## pressedR
+ # pressedR
+This function is called when the red square is pressed. It will animate the square and add it to the user input.
  */
     override func pressedR (_ recognizer: UITapGestureRecognizer) {
         if isWaiting { //checks to see if the computer is looking for user input
 /*:
-## oneTimePing
+## Animating a Square
 Here is where we will code the action of the `UITapGestureRecognizer` for `self.red`. When a square is pressed there are three things that need to happen. 
-1. animate to tell user it was pressed. 
-2. add it's color to the user input. 
-3. check if the user-entered input is done and if so, if it is correct or not.
+1. The Square should animate.
+2. Add the square to the list of user inputs.
+3. check to see if the user is done inputting and check if they entered the correct sequence.
 \
 \
 For step 1, the **command** to animate a square is `self.oneTimePing (Square)`. To animate the red square, it would look like this. 
@@ -160,7 +161,7 @@ There are corresponding names for the green, blue, and yellow squares: `Squares.
  */
             //add the *command* to animate the red square here
 /*:
-## Appending
+## Adding to an Array
 Now to add the square to the input. to access the user input we write `self.input`. `self.input` is an `array`. an `Array` is essentially an ordered list and we are using it to store all of the inputs for the user. The **command** to add a new square to the input is `self.input.append (square)`. Here is what the **command** for adding the red square to the input `array` would look like.
 ````
 self.input.append (Squares.Red) 
@@ -190,12 +191,14 @@ Note how we can tell how many squares have been input by written the **command**
 An *if-statement* needs to be written below. It should check if `self.input` and `self.sequence` are equal. if they are equal, the `function` `self.success ()` should be run, otherwise the `function` `self.fail ()` should be run.
  */
                 //write your if-statement here
-                self.input = []//always clear input
+                
+                self.input = []//always clear input last
             }
         }
     }
 /*:
-## PressedG
+# PressedG
+This function is called when the green square is pressed. It will animate the square and add it to the user input.
  */
     override func pressedG (_ recognizer: UITapGestureRecognizer) {
         if isWaiting {
@@ -206,7 +209,8 @@ Repeat the code for `pressedR` but for green instead.
         }
     }
 /*:
-## PressedB
+# PressedB
+This function is called when the blue square is pressed. It will animate the square and add it to the user input.
 */
     override func pressedB (_ recognizer: UITapGestureRecognizer) {
         if isWaiting {
@@ -217,7 +221,8 @@ Repeat the code for `pressedR` but for blue instead.
         }
     }
 /*:
- ## pressedY
+ # pressedY
+This function is called when the yellow square is pressed. It will animate the square and add it to the user input.
  */
     override func pressedY (_ recognizer: UITapGestureRecognizer) {
         if isWaiting {
@@ -228,7 +233,8 @@ Repeat the code for `pressedR` but for yellow instead.
         }
     }
 /*:
- ## showPattern
+ # showPattern
+This function is called when the start button is pressed. It will display the loaded sequence and will not run if a sequence has not been loaded.
  */
     override func showPattern (_ recognizer: UITapGestureRecognizer) {
         if self.sequence.isEmpty && !isDisplaying { return } //checks if sequence can be displayed.
@@ -269,10 +275,12 @@ Now we need a way to queue up each animation for the given square. To add the an
         startDisplayingSequence () //start to display the animations
     }
 /*:
- ## randomSequence 
+ # randomSequence
+This function will generate a random sequence of squares. `of` is the number of squares that will be randomly generated.
  */
     override func randomSequence (of:Int) -> [Squares] {
         var seq:[Squares] = []
+        Squares.Red
 /*:
 This `function` should create a randomly generated `array` of `Squares`. This first step, create the `array` is already done. Now it needs to be populated. Much like with looping through the sequence in the `function` above, a *for-loop* should be used. A *for-loop* that loops a certain number of times can be written like this: 
 ````
