@@ -211,6 +211,7 @@ This code is run when the green button is pressed. It will animate the button an
 Repeat the code for `pressedR` but for green instead.
 */
             //write the code for pressG here
+            
         }
     }
 /*:
@@ -223,6 +224,7 @@ This code is run when the blue button is pressed. It will animate the button and
 Repeat the code for `pressedR` but for blue instead.
 */
             //write the code for pressB here
+            
         }
     }
 /*:
@@ -235,6 +237,7 @@ This code is run when the yellow button is pressed. It will animate the button a
 Repeat the code for `pressedR` but for yellow instead.
 */
             //write the code for pressY here
+            
         }
     }
 /*:
@@ -264,7 +267,7 @@ for i in self.pattern {
 Now we need a way to queue up each animation for the given square. To add the animation to blink the red button we use the **command**: `addRedToQueue ()`. Just like with all the functions so far, there are counterparts for green, blue, and yellow button also. Fill out the code below.
  */
         for i in self.pattern { //loops through self.pattern
-            if i == Squares.Red { //checks if red square
+            if i == Squares.Red {
                 //add code to add the animation for the red button to the queue
                 
             }
