@@ -12,7 +12,7 @@ open class SimonController {
     open var green:UIView? //green  box
     open var blue:UIView? //blue   box
     open var yellow:UIView? //yellow box
-    open var sequence:[Squares] = []
+    open var pattern:[Squares] = []
     open var input:[Squares] = [] //user input
     private var animations:[() -> Void] = [] //animation queue
     open var isDisplaying:Bool = false
@@ -93,7 +93,7 @@ open class SimonController {
     //used to load a sequence
     open func loadSequence (seq: [Squares])  {
         print ("new sequence loaded.")
-        self.sequence = seq
+        self.pattern = seq
     }
     //@ignore
     private func __pingR () {
@@ -182,21 +182,21 @@ open class SimonController {
         animations.append (__pingY)
     }
     //used to start the animation chain going.
-    public func startDisplayingSequence () {
+    public func startDisplayingPattern () {
         print ("*****************************")
         animations.append (__end)
         animations.removeFirst () ()
     }
     //displays sequence
     @objc open func showPattern (_ recognizer: UITapGestureRecognizer) {
-        if sequence.isEmpty && !isDisplaying { return }
+        if pattern.isEmpty || !isDisplaying { return }
         if isWaiting { //no cheating
-            sequence = []
+            pattern = []
             isWaiting = false
         }
         print ("----------loading Pattern----------")
         isDisplaying = true
-        for i in self.sequence {
+        for i in self.pattern {
             if i == .Red {
                 addRedToQueue ()
             } else if i == .Green {
@@ -208,7 +208,7 @@ open class SimonController {
             }
         }
         print ("----------Pattern Loaded-----------")
-        startDisplayingSequence ()
+        startDisplayingPattern ()
     }
     
     @objc open func pressedR (_ recognizer: UITapGestureRecognizer) {
@@ -216,8 +216,8 @@ open class SimonController {
             print ("[red tap]")
             self.__pingR ()
             self.input.append (Squares.Red)
-            if input.count == sequence.count {
-                if sequence == input {
+            if input.count == pattern.count {
+                if pattern == input {
                     self.success ()
                 } else {
                     self.fail ()
@@ -232,8 +232,8 @@ open class SimonController {
             print ("[green tap]")
             self.__pingG ()
             self.input.append (Squares.Green)
-            if input.count == sequence.count {
-                if sequence == input {
+            if input.count == pattern.count {
+                if pattern == input {
                     self.success ()
                 } else {
                     self.fail ()
@@ -248,8 +248,8 @@ open class SimonController {
             print ("[blue tap]")
             self.__pingB ()
             self.input.append (Squares.Blue)
-            if input.count == sequence.count {
-                if sequence == input {
+            if input.count == pattern.count {
+                if pattern == input {
                     self.success ()
                 } else {
                     self.fail ()
@@ -264,8 +264,8 @@ open class SimonController {
             print ("[yellow tap]")
             self.__pingY ()
             self.input.append (Squares.Yellow)
-            if input.count == sequence.count {
-                if sequence == input {
+            if input.count == pattern.count {
+                if pattern == input {
                     self.success ()
                 } else {
                     self.fail ()
@@ -294,7 +294,7 @@ open class SimonController {
         })
     }
     
-    open func randomSequence (of:Int) -> [Squares] {
+    open func randomPattern (of:Int) -> [Squares] {
         var seq:[Squares] = []
         print ("Random sequence = <[")
         for _ in 1...of {

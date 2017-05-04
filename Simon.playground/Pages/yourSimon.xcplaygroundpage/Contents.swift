@@ -15,7 +15,7 @@ This code is run at the start of your game and is used to create the screen alon
         super.init ()
 /*:
 ## Making a Screen
- First, We need to make a screen for our game. In order to make a screen we need to know the size of the screen and where to put the screen. A point is called a `CGPoint` and is created with this **command**: `CGPoint (x:,y:)`. Sizes are called `CGSize` and are created with this **command**: `CGSize (width:,height:)`. Here is how to make a point and size for our screen.
+ First, We need to make a screen for our game. In order to make a screen we need to know the size of the screen and where to put the screen. A point is called a `CGPoint` and is created with the **command**: `CGPoint (x:,y:)`. A screen size is called a `CGSize` and is created with the **command**: `CGSize (width:,height:)`. Here is how to make a `CGPoint` named `origin` and a `CGSize` named `size`.
 ````
 var origin = CGPoint (x:0, y:0)
 var size = CGSize (width:700, height: 700)
@@ -25,17 +25,16 @@ var size = CGSize (width:700, height: 700)
         let size = CGSize (width:700, height: 700) //size of screen
         
 /*:
-
-## Sizing a Screen
-Now we need to make the frame for the screen. A frame is called a `CGRect` and is created by calling the `function` `CGRect (CGPoint, CGSize)`.
+## Framing a Screen
+Now that we have the size and position of the screen we need to combine them into a frame object called a `CGRect`. This frame will store all of the information for the screen in one place. A `CGRect` is created with the **command**: `CGRect (origin:,size:)`. Here is how you would make a `CGRect` called `frame`.
 ````
 var frame = CGRect (origin: origin, size: size)
 ````
 */
         let frame = CGRect (origin: origin, size: size)
 /*:
-## Viewing a Screen
-All thats left to do is make the screen and tell the computer to display it. A screen is called a `UIView` and is created by calling the `function` `UIView (frame:)`. We tell the computer to display the screen with the following **command**: `PlaygroundPage.current.LiveView = screen`.
+## Displaying a Screen
+All thats left to do is make the screen and tell the computer to display it. A screen is called a `UIView` and is created with the **command**: ` `UIView (frame:)`. After the `UIView` is created we can tell the computer to display the screen with the following **command**: `PlaygroundPage.current.LiveView = screen`.
 ````
 var screen = UIView (frame:frame)
 PlaygroundPage.current.liveView = screen
@@ -44,7 +43,7 @@ PlaygroundPage.current.liveView = screen
         let screen = UIView (frame: frame)
         PlaygroundPage.current.liveView = screen
 /*:
-Now that the `screen` is made, we need to add the squares. The `variables` for the squares are already created and are called `red`, `green`, `blue`, and `yellow` but we still make their frames. Lets start by making origin points for each square.
+Now that the `screen` is made, we need to add the buttons. The `variables` for the buttons are already created and are called `red`, `green`, `blue`, and `yellow` but they are missing their `UIViews`. Lets start by making origin points for each of the colored buttons.
 ````
 let redOrigin
 let greenOrigin
@@ -54,64 +53,69 @@ let yellowOrigin
 You can set them to `CGPoint (x:0, y:0)` and change them later once they are displayed.
 */
         //Create origins here
+        
 /*:
-The next step is to make the `CGSize` for the squares, because all the squares are the same size, we only need one. I suggest `CGSize (width:200, height:200)`.
+The next step is to make the `CGSize` for the buttons and because all the buttons are the same size, we only need one size. I suggest `CGSize (width:200, height:200)`.
 ````
 let squareSize
 ````
 */
         //make squareSize here
+        
 /*:
 ## Adding to a Screen
-Now, all thats left is to make `CGRect`s and `UIView`s for the squares and then display them. If we want to access the `variable` for the red square, we can do it with the **command**: `self.red`. If we wanted to access the green sqaure instead, we would use `self.green`. There are four squares, red, green, blue, yellow. Adding a new `UIView` to an already existing screen is done with the following **command**: `screen.addSubview (UIView)`. Here is how the above steps would look like, try making them for the all the squares.
+Now, all thats left is to make `CGRect`s and `UIView`s for the buttons and then display them. If we want to access the `variable` for the red button, we can do it with the **command**: `self.red`. If we wanted to access the green button instead, we would use `self.green`. There are four colored buttons, red, green, blue, yellow. Adding a new `UIView` to an already existing screen is done with the following **command**: `screen.addSubview (UIView)`. Here is how the above steps would look like, try making them for the all the buttons.
 ````
 let redRect = CGRect (origin:redOrigin, size:squareSize)
 self.red = UIView (frame:redRect)
 screen.addSubview (self.red!)
 ````
 */
-        //finish making the squares here 
+        //finish making the buttons here
+        
 /*:
 ## Changing Colors
-The squares do not show because they are black, just like the screen. You can change the color of a `UIView` with the following **command**.
+If you did the previous steps correctly, they buttons will still not show up.  This is because all of the buttons are black, just like the screen. You can change the color of a `UIView` with the **command**: `self.red?.backgroundColor = UIColor.red`.
 ````
 self.red?.backgroundColor = UIColor.red
 ````
-There are a lot of colors to choose from, here is a list: black, gray, white, red, green, blue, cyan, yellow, magenta, orange, purple, brown. We can access a color with the following **command**. `UIColor.color` where "color" is the name of the color we want. Try change the color of the squares. Just remember that even though we will be referencing the squares by a specific color, they do not need to be that color.
+There are a lot of colors to choose from, here is a list: black, gray, white, red, green, blue, cyan, yellow, magenta, orange, purple, brown. We can access a color with the following **command**. `UIColor.color` where "color" is the name of the color you want. Try changing the color of the each button. Remember that even though we will be referencing the buttons by a specific color, they do not need to be that color.
 */
-        //change color of squares here 
+        //change color of buttons here 
+        
 /*:
-Here is where you will want to go back and change the origin point of all the squares so they are spaced out evenly. Think of the screen like a grid. the `x` line is horizontal and the `y` line is vertical. The greater the `x` and/or `y` the farther it will be from the origin. The origin is the top left corner of the screen.
+Here is where you will want to go back and change the origin point of all the buttons so they are spaced out evenly. To do so, think of the screen like a grid. the `x` line is horizontal and the `y` line is vertical. The greater the `x` and/or `y` the farther it will be from the origin. The origin is the top left corner of the screen.
 \
-Now that the squares are placed, they need to be dimmed in preperation for the blink animation. Here is the **command** to dim the red sqaure.
+Now that the buttons are placed, they need to be dimmed in preperation for the animation. Here is the **command** to dim the red button.
 ````
 self.red?.alpha = 0.5
 ````
 */
         //dim all of the squares to 0.5 here
+        
 /*:
 ## User Input
-The squares can be setup to respond to user input. This is done in three steps:
-1. Write a function to run when the square is pressed.
-2. Create a `UITapGestureRecognizer` to detect when a square is tapped.
-3. Add the `UITapGestureRecognizer` to a sqaure so it can respond to being tapped.
+Now it's time to setup the buttons to respond to user input. This is done in three steps:
+1. Write code to run when the button is pressed.
+2. Create a `UITapGestureRecognizer` to detect when the button is tapped.
+3. Add the `UITapGestureRecognizer` to the button so it can respond to being tapped.
 \
 \
-We will be writing the function to run when the square is pressed later on in this tutorial, but for now we can do steps 2 and 3. A `UITapGestureRecognizer` is made with the following **command**: `UITapGestureRecognizer (target:, action:)`. The target is `self` an the action is the name of the function we want wrapped up so the `UITapGestureRecognizer` can use it. We added a `UITapGestureRecognizer` to our button with this **command**: `addGestureRecognizer(Gesture)`. Doing steps 2 and 3 for the red square would look like this.
+We will be writing the code to run when the button is pressed later on in this tutorial. For now we can do steps 2 and 3. A `UITapGestureRecognizer` is made with the **command**: `UITapGestureRecognizer (target:, action:)`. The target is `self` an the action is the name of the code we to run. A `UITapGestureRecognizer` is attached to a button with the **command**: `addGestureRecognizer(Gesture)`. Doing steps 2 and 3 for the red button would look like this.
 ````
 let tapRed = UITapGestureRecognizer(target: self,
                                 action:#selector (self.pressedR (_:)))
 self.red?.addGestureRecognizer(tapRed)
 ````
-Try creating and adding `UITapGestureRecognizers` for the rest of the squares. There are corresponding `functions` called `pressedG`, `pressedB`, and `pressedY` for their respective squares.
+Try creating and adding `UITapGestureRecognizers` for the rest of the buttons. There are corresponding `functions` called `pressedG`, `pressedB`, and `pressedY` for their respective buttons.
  */
         let tapRed = UITapGestureRecognizer(target: self,
                                         action:#selector (self.pressedR (_:)))
         self.red?.addGestureRecognizer(tapRed)
-        self.startBtn?.isUserInteractionEnabled = true
-        //create and add UITapGestureRecognizers for the rest of the squares here 
+        //create and add UITapGestureRecognizers for the rest of the buttons here
+        
 /*:
-Pressing them will still not make them light up. This is because we have not done step 1 yet; we will do that later. We still have to make the start button and the light that tells the user if they got it correct or not. The name of the light is called correct and is accessed with `self.correct`. It is a `UIView` just like the squares, so lets make an origin and a size for it and then place it on the screen. Remember to change the color so you can see it.
+Pressing them will still not make them light up. This is because we have not done step 1 yet; we will do that later. We still have to make the start button and the light that tells the user if they entered the right pattern. The name of the light is called correct and is named `self.correct`. It is a `UIView` just like the other buttons, so lets make an origin and a size for it and then place it on the screen. Remember to change the color so you can see it, I would suggest `UIColor.white`.
 ````
 let correctOrigin 
 let correctSize 
@@ -119,50 +123,51 @@ let correctRect
 ````
  */
         //create and place self.correct here 
+        
 /*:
-Now all thats left to do it make the start button. The start button is accessed with `self.startBtn` and is a `UILabel`. A `UILabel` is similar to a `UIView` but meant to have text inside of it. `UILabels` are made with the follow **command**: `UILabel (frame:)`. Just like `UIView` `UILabel` needs a frame which needs an origin and a size. Create them below. 
+Now all thats left to do it make the start button. The start button is named `self.startBtn` and is a `UILabel`. A `UILabel` is similar to a `UIView` except that it meant to have text inside of it. `UILabels` are made with the **command**: `UILabel (frame:)`. Just like `UIView`, `UILabel` needs a frame which needs an origin and a size. Create them below. Don't forget to add the start button to the screen.
 ````
 let startBtnOrigin 
 let startBtnSize
 let startBtnRect
+screen.addSubview (self.startBtn!)
 ````
  */
-        //create self.startBtn here and put it on the screen 
+        //create self.startBtn here and put it on the screen
+        
         self.startBtn?.text = "start" //puts the text in the box
         self.startBtn?.textAlignment = NSTextAlignment.center //makes sure text is centered
-        //below sets up the user input for startBtn
+        //set up the user input for startBtn
         let sb = UITapGestureRecognizer (target: self,
                                          action:#selector (self.showPattern (_:)))
         self.startBtn?.addGestureRecognizer (sb)
-/*:
-The last thing we need to do here is setup the `startBtn` so that it shows the pattern of squares lighting up. Just like with making the animations for the squares there are 3 steps. We will do the last 2 here. The name of the `functions` that shows the pattern is called `showPattern` and we will make it later. Setup the `UITapGestureRecognizer` for `startBtn` below.
- */
-        //setup UITapGestureRecognizer for startBtn here
+        self.startBtn?.isUserInteractionEnabled = true //allows it to be tapped.
     }
 /*:
  # pressedR
-This function is called when the red square is pressed. It will animate the square and add it to the user input.
+This code is run when the red button is pressed. It will animate the button and add it to the user input.
  */
     override func pressedR (_ recognizer: UITapGestureRecognizer) {
         if isWaiting { //checks to see if the computer is looking for user input
 /*:
-## Animating a Square
-Here is where we will code the action of the `UITapGestureRecognizer` for `self.red`. When a square is pressed there are three things that need to happen. 
-1. The Square should animate.
-2. Add the square to the list of user inputs.
-3. check to see if the user is done inputting and check if they entered the correct sequence.
+## Animating a Button
+Here is where we will code the action of the `UITapGestureRecognizer` for `self.red`. When a button is pressed there are three things that need to happen.
+1. Animate the button.
+2. Add the button to the list of user inputs.
+3. check to see if the user is done inputting and check if they entered the correct pattern.
 \
 \
-For step 1, the **command** to animate a square is `self.oneTimePing (Square)`. To animate the red square, it would look like this. 
+For step 1, the **command** to animate a square is `self.oneTimePing (Square)`. To animate the red button, it would look like this.
 ````
 self.oneTimePing (Squares.Red)
 ````
-There are corresponding names for the green, blue, and yellow squares: `Squares.Green`, `Squares.Blue`, and `Squares.Yellow`. Think of these as guides, while not the actual square it tells the `function` `oneTimePing` which square to use.
+There are corresponding names for the green, blue, and yellow buttons: `Squares.Green`, `Squares.Blue`, and `Squares.Yellow`. Think of these as guides, while not the actual button it tells the computer which button to reference.
  */
-            //add the *command* to animate the red square here
+            //add the command to animate the red button here
+            
 /*:
 ## Adding to an Array
-Now to add the square to the input. to access the user input we write `self.input`. `self.input` is an `array`. an `Array` is essentially an ordered list and we are using it to store all of the inputs for the user. The **command** to add a new square to the input is `self.input.append (square)`. Here is what the **command** for adding the red square to the input `array` would look like.
+Now to add the Square to the input. to access the user input we write `self.input`. `self.input` is an `array`. an `Array` is essentially an ordered list and we are using it to store all of the inputs for the user. The **command** to add a new square to the input is `self.input.append (Square)`. Here is what the **command** for adding the red Square to the input `array` would look like.
 ````
 self.input.append (Squares.Red) 
 ````
@@ -178,17 +183,17 @@ if (condition) {
     (other code)
 }
 ````
-For an *if-statement*, the *(code)* will be run *if* the *(condition)* is **true** and *(other code)* will be run *if* *(condition)* is **false**. This way a computer can change how it works depending on the situation. here is what an *if-statement* would look like that checks to see if enough inputs have been entered to warrant checking to see if the user entered the right squares.
+For an *if-statement*, the *(code)* will be run *if* the *(condition)* is **true** and *(other code)* will be run *if* *(condition)* is **false**. This way a computer can change how it works depending on the situation. here is what an *if-statement* would look like that checks to see if enough inputs have been entered to warrant checking to see if the user entered the right pattern.
 ````
-if self.input.count == self.sequence.count {
+if self.input.count == self.pattern.count {
     //code here
 }
 ````
-Note how we can tell how many squares have been input by written the **command**: `self.input.count`. This can be done for all `arrays`(yes, this means `self.sequence` is also an `array`. We can tell if two `arrays` are equal, or the same, with the following **command**: `array1 == array2`.
+Note how we can tell how many squares have been input by written the **command**: `self.input.count`. This can be done for all `arrays`(yes, this means `self.pattern` is also an `array`). We can tell if two `arrays` are equal with the **command**: `array1 == array2`.
  */
-            if self.input.count == self.sequence.count {
+            if self.input.count == self.pattern.count {
 /*:
-An *if-statement* needs to be written below. It should check if `self.input` and `self.sequence` are equal. if they are equal, the `function` `self.success ()` should be run, otherwise the `function` `self.fail ()` should be run.
+An *if-statement* needs to be written below. It should check if `self.input` and `self.pattern` are equal. if they are equal, the **command** `self.success ()` should be run, otherwise the **command** `self.fail ()` should be run.
  */
                 //write your if-statement here
                 
@@ -198,7 +203,7 @@ An *if-statement* needs to be written below. It should check if `self.input` and
     }
 /*:
 # PressedG
-This function is called when the green square is pressed. It will animate the square and add it to the user input.
+This code is run when the green button is pressed. It will animate the button and add it to the user input.
  */
     override func pressedG (_ recognizer: UITapGestureRecognizer) {
         if isWaiting {
@@ -210,7 +215,7 @@ Repeat the code for `pressedR` but for green instead.
     }
 /*:
 # PressedB
-This function is called when the blue square is pressed. It will animate the square and add it to the user input.
+This code is run when the blue button is pressed. It will animate the button and add it to the user input.
 */
     override func pressedB (_ recognizer: UITapGestureRecognizer) {
         if isWaiting {
@@ -222,7 +227,7 @@ Repeat the code for `pressedR` but for blue instead.
     }
 /*:
  # pressedY
-This function is called when the yellow square is pressed. It will animate the square and add it to the user input.
+This code is run when the yellow square is button. It will animate the button and add it to the user input.
  */
     override func pressedY (_ recognizer: UITapGestureRecognizer) {
         if isWaiting {
@@ -234,18 +239,18 @@ Repeat the code for `pressedR` but for yellow instead.
     }
 /*:
  # showPattern
-This function is called when the start button is pressed. It will display the loaded sequence and will not run if a sequence has not been loaded.
+This code is run when the start button is pressed. It will display the loaded pattern and will not run if a pattern has not been loaded.
  */
     override func showPattern (_ recognizer: UITapGestureRecognizer) {
-        if self.sequence.isEmpty && !isDisplaying { return } //checks if sequence can be displayed.
+        if self.pattern.isEmpty || !isDisplaying { return } //checks if pattern can be displayed.
         if isWaiting { //no cheating
             self.input = [] //clear input
             isWaiting = false //stop user input
         }
-        isDisplaying = true //we are now displaying sequence
+        isDisplaying = true //we are now displaying pattern
 /*:
 ## For-loops
-Here is where the code for displaying `self.sequence` will be written. At this point, `self.sequence` is an `array` of squares and we need to go through the array and tell the computer to animate them, in order. Luckily there is a way to queue up the animations so all we need to do is tell the computer which animation to put in the queue. We first need a way to go through everything in the `array`. This is done with a *for-loop*, which looks like this:
+Here is where the code for displaying `self.pattern` will be written. At this point, `self.pattern` is an `array` of squares and we need to go through the array and tell the computer to animate them, in order. Luckily there is a way to queue up the animations so all we need to do is tell the computer which animation to put in the queue. We first need a way to go through everything in the `array`. This is done with a *for-loop*, which looks like this:
 ````
 for (name) in (array) {
     (code)
@@ -253,67 +258,76 @@ for (name) in (array) {
 ````
 This tells the computer to run *(code)* once for `element` in the `array`. In *(code)* we can reference the specific `element` in the `array` by `(name)`. An `element` is essentially a single `variable` that is in the `array`. Here is an example if a *for-loop*.
 ````
-for i in self.sequence {
+for i in self.pattern {
 }
 ````
-Now we need a way to queue up each animation for the given square. To add the animation to bink the red square we use the **command**: `addRedToQueue ()`. Just like with all the functions so far, there are counterparts for green, blue, and yellow squares also. Fill out the code below.
+Now we need a way to queue up each animation for the given square. To add the animation to bink the red button we use the **command**: `addRedToQueue ()`. Just like with all the functions so far, there are counterparts for green, blue, and yellow button also. Fill out the code below.
  */
-        for i in self.sequence { //loops through self.sequence
+        for i in self.pattern { //loops through self.pattern
             if i == Squares.Red { //checks if red square
-                //add code to add the animation for the red square to the queue
+                //add code to add the animation for the red button to the queue
+                
             }
             if i == Squares.Green {
-                //add code to add the animation for the green square to the queue
+                //add code to add the animation for the green button to the queue
+                
             }
             if i == Squares.Blue {
-                //add code to add the animation for the blue square to the queue
+                //add code to add the animation for the blue button to the queue
+                
             }
             if i == Squares.Yellow {
-                //add code to add the animation for the yellow square to the queue
+                //add code to add the animation for the yellow button to the queue
+                
             }
         }//end of for-loop
-        startDisplayingSequence () //start to display the animations
+        startDisplayingPattern () //start to display the animations
     }
 /*:
- # randomSequence
-This function will generate a random sequence of squares. `of` is the number of squares that will be randomly generated.
+ # randompattern
+This code will generate a random pattern of Squares. `of` is the number of Sqaures that will be randomly generated.
  */
-    override func randomSequence (of:Int) -> [Squares] {
+    override func randomPattern (of:Int) -> [Squares] {
         var seq:[Squares] = []
-        Squares.Red
 /*:
-This `function` should create a randomly generated `array` of `Squares`. This first step, create the `array` is already done. Now it needs to be populated. Much like with looping through the sequence in the `function` above, a *for-loop* should be used. A *for-loop* that loops a certain number of times can be written like this: 
+Here, you will be writing the code to generate a pattern of random Squares. This first step, create the `array`, is already done above. Now it needs to be filled with random Squares. Much like with looping through the pattern in the previous section, a *for-loop* should be used. A *for-loop* that runs a certain number of times can be written like this:
 ````
 for i in lower...upper {// "{" starts the for-loop
     (code)
 } // "}" ends the for-loop
 ````
-Here, `lower...upper` is a `range`. A `range` is a list of numbers that can be looped through. The **command**: `1...5` would produce the `range` `[1, 2, 3, 4, 5]`. In the space below, write a *for-loop* that loops through the `range` `1...of`.
+Here, `lower...upper` is a `range`. A `range` is a list of numbers that can be looped through. The **command**: `1...5` would produce the `range` `[1, 2, 3, 4, 5]`. In the space below, write a *for-loop* that loops through the `range` `1...of`. So the code for the *for-loop* would look like 
+````
+for i in 1...of {
+    (code)
+}
+````
+The *(code)* that goes inside the *for-loop* is written below. Surround it in a *for-loop*.
  */
         //start your for-loop here
-            var t:Squares //will hold the random Square
-/*:
-## Random Numbers
-Now for the *(code)*. To create a random number use the **command** `arc4random_uniform (n)` to create a random number between 0 and n-1. For this case, since there are 4 options, n should be 4. Create and assign a `variable` `r` to be a random number between 0 and 3.
- */
-        //create r here
-/*:
-Much like the loop in the previous example, a few *if-statements* are needed to determine the value of `t`. Write *if-statments* below that will assign `t` a square depending on the random number generated. If `r` is 0 then `t` should be Squares.Red, if `r` is 1 then `t` should be Squares.Green, if `r` is 2 then `t` should be Squares.Blue, if `r` is 3 then `t` should be Squares.Yellow.
- */
-        //write your if-statements here. 
-/*:
-The last thing to do is to add `t` to the new sequence, `seq`. This can be done with the **command**: `seq.append (t)`.
- */
-        //append t to seq here
+        
+            var t:Squares
+            let i = arc4random_uniform(4)//how to make a random number
+            if i == 0 {
+                t = Squares.Red
+            } else if i == 1 {
+                t = Squares.Green
+            } else if i == 2 {
+                t = Squares.Blue
+            } else {
+                t = Squares.Yellow
+            }
+            seq.append (t)
         //end your for-loop here
+        
         return seq
     }
     
 }
 
 var simon = yourSimonController (page: PlaygroundPage.current)
-//let rseq = simon.randomSequence (of:<pick a number>)
-//simon.loadSequence (seq:rseq)
+//let rseq = simon.randompattern (of:<pick a number>)
+//simon.loadpattern (seq:rseq)
 
 //try out the game you just made!
 
