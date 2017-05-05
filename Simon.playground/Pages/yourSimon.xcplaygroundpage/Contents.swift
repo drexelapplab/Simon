@@ -21,8 +21,8 @@ var origin = CGPoint (x:0, y:0)
 var size = CGSize (width:700, height: 700)
  ````
  */
-        let origin = CGPoint (x:0, y:0) //origin point
-        let size = CGSize (width:700, height: 700) //size of screen
+        let origin = CGPoint (x:0, y:0) //point
+        let size = CGSize (width:700, height: 700) //size
         
 /*:
 ## Framing a Screen
@@ -31,7 +31,7 @@ Now that we have the size and position of the screen we need to combine them int
 var frame = CGRect (origin: origin, size: size)
 ````
 */
-        let frame = CGRect (origin: origin, size: size)
+        let frame = CGRect (origin: origin, size: size)//frame
 /*:
 ## Displaying a Screen
 All thats left to do is make the screen and tell the computer to display it. A screen is called a `UIView` and is created with the **command**: `UIView (frame:)`. After the `UIView` is created we can tell the computer to display the screen with the following **command**: `PlaygroundPage.current.LiveView = screen`.
@@ -40,8 +40,8 @@ var screen = UIView (frame:frame)
 PlaygroundPage.current.liveView = screen
 ````
 */
-        let screen = UIView (frame: frame)
-        PlaygroundPage.current.liveView = screen
+        let screen = UIView (frame: frame)//screen
+        PlaygroundPage.current.liveView = screen//show screen
 /*:
 Now that the `screen` is made, we need to add the buttons. The `variables` for the buttons are already created and are called `red`, `green`, `blue`, and `yellow` but they are missing their `UIViews`. Lets start by making origin points for each of the colored buttons.
 ````
@@ -57,16 +57,16 @@ You can set them to `CGPoint (x:0, y:0)` and change them later once they are dis
 /*:
 The next step is to make the `CGSize` for the buttons and because all the buttons are the same size, we only need one size. I suggest `CGSize (width:200, height:200)`.
 ````
-let squareSize
+let buttonSize
 ````
 */
-        //make squareSize here
+        //make buttonSize here
         
 /*:
 ## Adding to a Screen
 Now, all that's left is to make `CGRect`s and `UIView`s for the buttons and then display them. If we want to access the `variable` for the red button, we can do it with the **command**: `self.red`. If we wanted to access the green button instead, we would use `self.green`. There are four colored buttons: red, green, blue, yellow. Adding a new `UIView` to an already existing screen is done with the following **command**: `screen.addSubview (UIView)`. Here is how the above steps would look like, try making them for the all the buttons.
 ````
-let redRect = CGRect (origin:redOrigin, size:squareSize)
+let redRect = CGRect (origin:redOrigin, size:buttonSize)
 self.red = UIView (frame:redRect)
 screen.addSubview (self.red!)
 ````
@@ -104,13 +104,13 @@ Now it's time to setup the buttons to respond to user input. This is done in thr
 We will be writing the code to run when the button is pressed later on in this tutorial. For now we can do steps 2 and 3. A `UITapGestureRecognizer` is made with the **command**: `UITapGestureRecognizer (target:, action:)`. The target is `self` and action is the code that will be run. A `UITapGestureRecognizer` is attached to a button with the **command**: `addGestureRecognizer(Gesture)`. Doing steps 2 and 3 for the red button would look like this.
 ````
 let tapRed = UITapGestureRecognizer(target: self,
-                                action:#selector (self.pressedR (_:)))
+            action:#selector (self.pressedR (_:)))
 self.red?.addGestureRecognizer(tapRed)
 ````
 Try creating and adding `UITapGestureRecognizers` for the rest of the buttons. There are corresponding `functions` called `pressedG`, `pressedB`, and `pressedY` for their respective buttons.
  */
         let tapRed = UITapGestureRecognizer(target: self,
-                                        action:#selector (self.pressedR (_:)))
+                    action:#selector (self.pressedR (_:)))
         self.red?.addGestureRecognizer(tapRed)
         //create and add UITapGestureRecognizers for the rest of the buttons here
         
@@ -135,11 +135,13 @@ screen.addSubview (self.startBtn!)
  */
         //create self.startBtn here and put it on the screen
         
+        
+        //this is the rest of the code to put text on the start button and do the rest of the configurations.
         self.startBtn?.text = "start" //puts the text in the box
         self.startBtn?.textAlignment = NSTextAlignment.center //makes sure text is centered
         //set up the user input for startBtn
         let sb = UITapGestureRecognizer (target: self,
-                                         action:#selector (self.showPattern (_:)))
+                        action:#selector (self.showPattern (_:)))
         self.startBtn?.addGestureRecognizer (sb)
         self.startBtn?.isUserInteractionEnabled = true //allows it to be tapped.
     }
@@ -167,12 +169,13 @@ There are corresponding names for the green, blue, and yellow buttons: `Squares.
             
 /*:
 ## Adding to an Array
-Now it's time to add the Square to the input. To access the user input we write `self.input`. `self.input` is an `array`. An `Array` is essentially an ordered list and we are using it to store all of the inputs for the user. The **command** to add a new square to the input is `self.input.append (Square)`. Here is what the **command** for adding the red Square to the input `array` would look like.
+Now it's time to add the Square to the input. All of the user inputs should be stored inside `self.input`. The object `self.input` is an `array` which is essentially an ordered list. The **command** to add a new square to the input is `self.input.append (Square)`. Here is what the **command** for adding the red Square to the input `array` would look like.
 ````
 self.input.append (Squares.Red) 
 ````
  */
             //add Square.Red to the input array here
+            
 /*:
 ## If-Statements
 For the last step we will need to tell the computer to use some logic. A computer can be instructed to run code only if a specified condition is **true** or **false**. We do this by making an *if-statement*, which looks like this.
