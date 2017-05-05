@@ -5,22 +5,22 @@ import PlaygroundSupport
 import QuartzCore
 
 open class SimonController {
-    public enum Squares:UInt8 {case Red=0, Green, Blue, Yellow} //makes things easy
+    public enum Tap:UInt8 {case Red=0, Green, Blue, Yellow} //makes things easy
     open var startBtn:UILabel? //start button
     open var correct:UIView? //displays if correct or not
     open var red:UIView? //red    box
     open var green:UIView? //green  box
     open var blue:UIView? //blue   box
     open var yellow:UIView? //yellow box
-    open var pattern:[Squares] = []
-    open var input:[Squares] = [] //user input
+    open var pattern:[Tap] = []
+    open var input:[Tap] = [] //user input
     private var animations:[() -> Void] = [] //animation queue
     open var isDisplaying:Bool = false
     open var isWaiting:Bool = false
     //example sequences
-    public static var EASY = [Squares.Red, Squares.Green, Squares.Blue, Squares.Yellow]
-    public static var MEDIUM = [Squares.Blue,Squares.Yellow,Squares.Green,Squares.Red,Squares.Green,Squares.Yellow,Squares.Yellow,Squares.Green]
-    public static var HARD = [Squares.Yellow,Squares.Green,Squares.Green,Squares.Red,Squares.Red,Squares.Green,Squares.Blue,Squares.Green,Squares.Yellow,Squares.Blue,Squares.Red,Squares.Blue,Squares.Yellow,Squares.Green,Squares.Green,Squares.Blue]
+    public static var EASY = [Tap.Red, Tap.Green, Tap.Blue, Tap.Yellow]
+    public static var MEDIUM = [Tap.Blue,Tap.Yellow,Tap.Green,Tap.Red,Tap.Green,Tap.Yellow,Tap.Yellow,Tap.Green]
+    public static var HARD = [Tap.Yellow,Tap.Green,Tap.Green,Tap.Red,Tap.Red,Tap.Green,Tap.Blue,Tap.Green,Tap.Yellow,Tap.Blue,Tap.Red,Tap.Blue,Tap.Yellow,Tap.Green,Tap.Green,Tap.Blue]
 
     public init () {} //benign
     //init, places all of the objects on the UIView and configures all input
@@ -91,7 +91,7 @@ open class SimonController {
         print ("SimonController loaded.")
     }
     //used to load a sequence
-    open func loadSequence (seq: [Squares])  {
+    open func loadSequence (seq: [Tap])  {
         print ("new sequence loaded.")
         self.pattern = seq
     }
@@ -215,7 +215,7 @@ open class SimonController {
         if isWaiting { //only do stuff when looking for input
             print ("[red tap]")
             self.__pingR ()
-            self.input.append (Squares.Red)
+            self.input.append (Tap.Red)
             if input.count == pattern.count {
                 if pattern == input {
                     self.success ()
@@ -231,7 +231,7 @@ open class SimonController {
         if isWaiting { //only do stuff when looking for input
             print ("[green tap]")
             self.__pingG ()
-            self.input.append (Squares.Green)
+            self.input.append (Tap.Green)
             if input.count == pattern.count {
                 if pattern == input {
                     self.success ()
@@ -247,7 +247,7 @@ open class SimonController {
         if isWaiting { //only do stuff when looking for input
             print ("[blue tap]")
             self.__pingB ()
-            self.input.append (Squares.Blue)
+            self.input.append (Tap.Blue)
             if input.count == pattern.count {
                 if pattern == input {
                     self.success ()
@@ -263,7 +263,7 @@ open class SimonController {
         if isWaiting { //only do stuff when looking for input
             print ("[yellow tap]")
             self.__pingY ()
-            self.input.append (Squares.Yellow)
+            self.input.append (Tap.Yellow)
             if input.count == pattern.count {
                 if pattern == input {
                     self.success ()
@@ -294,11 +294,11 @@ open class SimonController {
         })
     }
     
-    open func randomPattern (of:Int) -> [Squares] {
-        var seq:[Squares] = []
+    open func randomPattern (ofLength:Int) -> [Tap] {
+        var seq:[Tap] = []
         print ("Random sequence = <[")
-        for _ in 1...of {
-            var t:Squares
+        for _ in 1...ofLength {
+            var t:Tap
             let i = arc4random_uniform(4)
             if i == 0 {
                 t = .Red
@@ -319,7 +319,7 @@ open class SimonController {
         return seq
     }
     
-    public func oneTimePing (_ sq:Squares) {
+    public func oneTimePing (_ sq:Tap) {
         switch (sq) {
             case .Red:
                 self.__pingR ()

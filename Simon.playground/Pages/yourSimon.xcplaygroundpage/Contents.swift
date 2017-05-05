@@ -9,7 +9,7 @@ class yourSimonController: SimonController {
  ### Here, you will be learning how to make the game Simon.
  - - - 
  # Init
-This code is run at the start of your game and is used to create the screen along with place all the squares and other buttons.
+This code is run at the start of your game and is used to create the screen along with place all the Tap and other buttons.
  */
     override init (page:PlaygroundPage) {
         super.init ()
@@ -54,6 +54,7 @@ You can set them to `CGPoint (x:0, y:0)` and change them later once they are dis
 */
         //Create origins here
         
+        
 /*:
 The next step is to make the `CGSize` for the buttons and because all the buttons are the same size, we only need one size. I suggest `CGSize (width:200, height:200)`.
 ````
@@ -91,7 +92,7 @@ Now that the buttons are placed, they need to be dimmed in preparation for the a
 self.red?.alpha = 0.5
 ````
 */
-        //dim all of the squares to 0.5 here
+        //dim all of the Tap to 0.5 here
         
 /*:
 ## User Input
@@ -159,22 +160,22 @@ Here is where we will code the action of the `UITapGestureRecognizer` for `self.
 3. Check to see if the user is done inputting and check if they entered the correct pattern.
 \
 \
-For step 1, the **command** to animate a square is `self.oneTimePing (Square)`. To animate the red button, it would look like this.
+For step 1, the **command** to animate a Tap is `self.oneTimePing (Tap)`. To animate the red button, it would look like this.
 ````
-self.oneTimePing (Squares.Red)
+self.oneTimePing (Tap.Red)
 ````
-There are corresponding names for the green, blue, and yellow buttons: `Squares.Green`, `Squares.Blue`, and `Squares.Yellow`. Think of these as guides. While they are not the actual button, they tell the computer which button to reference.
+There are corresponding names for the green, blue, and yellow buttons: `Tap.Green`, `Tap.Blue`, and `Tap.Yellow`. Think of these as guides. While they are not the actual button, they tell the computer which button to reference.
  */
             //add the command to animate the red button here
             
 /*:
 ## Adding to an Array
-Now it's time to add the Square to the input. All of the user inputs should be stored inside `self.input`. The object `self.input` is an `array` which is essentially an ordered list. The **command** to add a new square to the input is `self.input.append (Square)`. Here is what the **command** for adding the red Square to the input `array` would look like.
+Now it's time to add the Tap to the input. All of the user inputs should be stored inside `self.input`. The object `self.input` is an `array` which is essentially an ordered list. The **command** to add a new Tap to the input is `self.input.append (Tap)`. Here is what the **command** for adding the red Tap to the input `array` would look like.
 ````
-self.input.append (Squares.Red) 
+self.input.append (Tap.Red) 
 ````
  */
-            //add Square.Red to the input array here
+            //add Tap.Red to the input array here
             
 /*:
 ## If-Statements
@@ -192,7 +193,7 @@ if self.input.count == self.pattern.count {
     //code here
 }
 ````
-Note how we can tell how many squares have been input so far with the **command**: `self.input.count`. This can be done for all `arrays`(yes, this means `self.pattern` is also an `array`). We can tell if two `arrays` are equal with the **command**: `array1 == array2`.
+Note how we can tell how many Tap have been input so far with the **command**: `self.input.count`. This can be done for all `arrays`(yes, this means `self.pattern` is also an `array`). We can tell if two `arrays` are equal with the **command**: `array1 == array2`.
  */
             if self.input.count == self.pattern.count {
 /*:
@@ -256,7 +257,7 @@ This code is run when the start button is pressed. It will display the loaded pa
         isDisplaying = true //we are now displaying pattern
 /*:
 ## For-loops
-Here is where the code for displaying `self.pattern` will be written. At this point, `self.pattern` is an `array` of squares and we need to go through the array and tell the computer to animate them, in order. Luckily there is a way to queue up the animations so all we need to do is tell the computer which animation to put in the queue. We first need a way to go through everything in the `array`. This is done with a *for-loop*, which looks like this:
+Here is where the code for displaying `self.pattern` will be written. At this point, `self.pattern` is an `array` of Tap and we need to go through the array and tell the computer to animate them, in order. Luckily there is a way to queue up the animations so all we need to do is tell the computer which animation to put in the queue. We first need a way to go through everything in the `array`. This is done with a *for-loop*, which looks like this:
 ````
 for (name) in (array) {
     (code)
@@ -267,22 +268,22 @@ This tells the computer to run *(code)* once for `element` in the `array`. In *(
 for i in self.pattern {
 }
 ````
-Now we need a way to queue up each animation for the given square. To add the animation to blink the red button we use the **command**: `addRedToQueue ()`. Just like with all the functions so far, there are counterparts for green, blue, and yellow button also. Fill out the code below.
+Now we need a way to queue up each animation for the given Tap. To add the animation to blink the red button we use the **command**: `addRedToQueue ()`. Just like with all the functions so far, there are counterparts for green, blue, and yellow button also. Fill out the code below.
  */
         for i in self.pattern { //loops through self.pattern
-            if i == Squares.Red {
+            if i == Tap.Red {
                 //add code to add the animation for the red button to the queue
                 
             }
-            if i == Squares.Green {
+            if i == Tap.Green {
                 //add code to add the animation for the green button to the queue
                 
             }
-            if i == Squares.Blue {
+            if i == Tap.Blue {
                 //add code to add the animation for the blue button to the queue
                 
             }
-            if i == Squares.Yellow {
+            if i == Tap.Yellow {
                 //add code to add the animation for the yellow button to the queue
                 
             }
@@ -291,12 +292,12 @@ Now we need a way to queue up each animation for the given square. To add the an
     }
 /*:
  # randomPattern
-This code will generate a random pattern of Squares. `of` is the number of Sqaures that will be randomly generated.
+This code will generate a random pattern of Tap. `of` is the number of Sqaures that will be randomly generated.
  */
-    override func randomPattern (of:Int) -> [Squares] {
-        var seq:[Squares] = []
+    override func randomPattern (ofLength:Int) -> [Tap] {
+        var seq:[Tap] = []
 /*:
-Here, you will be writing the code to generate a pattern of random Squares. This first step, create the `array`, is already done above. Now it needs to be filled with random Squares. Much like with looping through the pattern in the previous section, a *for-loop* should be used. A *for-loop* that runs a certain number of times can be written like this:
+Here, you will be writing the code to generate a pattern of random Tap. This first step, create the `array`, is already done above. Now it needs to be filled with random Tap. Much like with looping through the pattern in the previous section, a *for-loop* should be used. A *for-loop* that runs a certain number of times can be written like this:
 ````
 for i in lower...upper {// "{" starts the for-loop
     (code)
@@ -304,7 +305,7 @@ for i in lower...upper {// "{" starts the for-loop
 ````
 Here, `lower...upper` is a `range`. A `range` is a list of numbers that can be looped through. The **command**: `1...5` would produce the `range` `[1, 2, 3, 4, 5]`. In the space below, write a *for-loop* that loops through the `range` `1...of`. So the code for the *for-loop* would look like 
 ````
-for i in 1...of {
+for i in 1...ofLength {
     (code)
 }
 ````
@@ -312,16 +313,16 @@ The *(code)* that goes inside the *for-loop* is written below. Surround it in a 
  */
         //start your for-loop here
         
-            var t:Squares
+            var t:Tap
             let i = arc4random_uniform(4)//how to make a random number
             if i == 0 {
-                t = Squares.Red
+                t = Tap.Red
             } else if i == 1 {
-                t = Squares.Green
+                t = Tap.Green
             } else if i == 2 {
-                t = Squares.Blue
+                t = Tap.Blue
             } else {
-                t = Squares.Yellow
+                t = Tap.Yellow
             }
             seq.append (t)
         //end your for-loop here
