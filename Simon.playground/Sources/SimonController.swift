@@ -294,26 +294,24 @@ open class SimonController {
         })
     }
     
-    open func randomPattern (ofLength:Int) -> [Tap] {
+    open func randomPattern (_ length:Int) -> [Tap] {
         var seq:[Tap] = []
         print ("Random sequence = <[")
-        for _ in 1...ofLength {
-            var t:Tap
+        for _ in 1...length {
             let i = arc4random_uniform(4)
             if i == 0 {
-                t = .Red
+                seq.append (.Red)
                 print ("\tred")
             } else if i == 1 {
-                t = .Green
+                seq.append (.Green)
                 print ("\tgreen")
             } else if i == 2 {
-                t = .Blue
+                seq.append (.Blue)
                 print ("\tblue")
             } else {
-                t = .Yellow
+                seq.append (.Yellow)
                 print ("\tyellow")
             }
-            seq.append (t)
         }
         print ("]>")
         return seq
