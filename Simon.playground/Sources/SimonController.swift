@@ -89,11 +89,12 @@ open class SimonController {
         containerView.addSubview (self.startBtn!)
         containerView.addSubview (self.correct!)
         print ("SimonController loaded.")
+        self.loadPattern ()
     }
     //used to load a sequence
-    open func loadSequence (seq: [Tap])  {
-        print ("new sequence loaded.")
-        self.pattern = seq
+    open func loadPattern ()  {
+        print ("new pattern loaded.")
+        self.pattern = [randomTap ()]
     }
     //@ignore
     private func __pingR () {
@@ -157,57 +158,50 @@ open class SimonController {
     }
     //@ignore
     private func __end () {
-        print ("*****************************")
         isDisplaying = false
         isWaiting = true
     }
     //adds red-ping display animation to queue
     public func addRedToQueue () {
-        print ("\tred")
         animations.append (__pingR)
     }
     //adds green-ping display animation to queue
     public func addGreenToQueue () {
-        print ("\tgreen")
         animations.append (__pingG)
     }
     //adds blue-ping display animation to queue
     public func addBlueToQueue () {
-        print ("\tblue")
         animations.append (__pingB)
     }
     //adds yellow-ping display animation to queue
     public func addYellowToQueue () {
-        print ("\tyellow")
         animations.append (__pingY)
     }
     //used to start the animation chain going.
     public func startDisplayingPattern () {
-        print ("*****************************")
         animations.append (__end)
         animations.removeFirst () ()
     }
     //displays sequence
     @objc open func showPattern (_ recognizer: UITapGestureRecognizer) {
-        if pattern.isEmpty || !isDisplaying { return }
+        if pattern.isEmpty && !isDisplaying { return }
         if isWaiting { //no cheating
-            pattern = []
+            input = []
             isWaiting = false
         }
-        print ("----------loading Pattern----------")
         isDisplaying = true
-        for i in self.pattern {
-            if i == .Red {
-                addRedToQueue ()
-            } else if i == .Green {
-                addGreenToQueue ()
-            } else if i == .Blue {
-                addBlueToQueue ()
-            } else { //has to be yellow
-                addYellowToQueue ()
+        animations = pattern.map ({
+            switch $0 {
+            case .Red:
+                return __pingR
+            case .Green:
+                return __pingG
+            case .Blue:
+                return __pingB
+            case .Yellow:
+                return __pingY
             }
-        }
-        print ("----------Pattern Loaded-----------")
+        })
         startDisplayingPattern ()
     }
     
@@ -216,14 +210,7 @@ open class SimonController {
             print ("[red tap]")
             self.__pingR ()
             self.input.append (Tap.Red)
-            if input.count == pattern.count {
-                if pattern == input {
-                    self.success ()
-                } else {
-                    self.fail ()
-                }
-                input = []
-            }
+            self.check ()
         }
     }
     
@@ -232,14 +219,7 @@ open class SimonController {
             print ("[green tap]")
             self.__pingG ()
             self.input.append (Tap.Green)
-            if input.count == pattern.count {
-                if pattern == input {
-                    self.success ()
-                } else {
-                    self.fail ()
-                }
-                input = []
-            }
+            self.check ()
         }
     }
     
@@ -248,14 +228,7 @@ open class SimonController {
             print ("[blue tap]")
             self.__pingB ()
             self.input.append (Tap.Blue)
-            if input.count == pattern.count {
-                if pattern == input {
-                    self.success ()
-                } else {
-                    self.fail ()
-                }
-                input = []
-            }
+            self.check ()
         }
     }
     
@@ -264,14 +237,7 @@ open class SimonController {
             print ("[yellow tap]")
             self.__pingY ()
             self.input.append (Tap.Yellow)
-            if input.count == pattern.count {
-                if pattern == input {
-                    self.success ()
-                } else {
-                    self.fail ()
-                }
-                input = []
-            }
+            self.check ()
         }
     }
     
@@ -294,27 +260,19 @@ open class SimonController {
         })
     }
     
-    open func randomPattern (_ length:Int) -> [Tap] {
-        var seq:[Tap] = []
-        print ("Random sequence = <[")
-        for _ in 1...length {
-            let i = arc4random_uniform(4)
-            if i == 0 {
-                seq.append (.Red)
-                print ("\tred")
-            } else if i == 1 {
-                seq.append (.Green)
-                print ("\tgreen")
-            } else if i == 2 {
-                seq.append (.Blue)
-                print ("\tblue")
-            } else {
-                seq.append (.Yellow)
-                print ("\tyellow")
-            }
+    open func randomTap () -> Tap {
+        return Tap.init (rawValue: UInt8 (arc4random_uniform (4)))!
+    }
+    
+    open func check () {
+        if input[input.count-1] != pattern[input.count-1] {
+            self.fail ()
+            input = []
+        } else if input.count == pattern.count {
+            self.success ()
+            pattern.append (self.randomTap ())
+            input = []
         }
-        print ("]>")
-        return seq
     }
     
     public func oneTimePing (_ sq:Tap) {
@@ -331,6 +289,4 @@ open class SimonController {
     }
     
 }
-
-
 

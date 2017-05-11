@@ -4,6 +4,9 @@ import XCPlayground
 import PlaygroundSupport
 import QuartzCore
 class yourSimonController: SimonController {
+    override init (page:PlaygroundPage) {
+        super.init ()
+//ignore code above this
 /*:
  # Simon
  ### Learn how to make the game Simon.
@@ -11,8 +14,6 @@ class yourSimonController: SimonController {
  # Building the Screen
 This section will go over how to setup your game. This includes creating a background, setting up buttons and adding user input functionality to them.
  */
-    override init (page:PlaygroundPage) {
-        super.init ()
 /*:
 ## Making the Background
  First, We need to make a background for our game. In order to make a background we need to know the size of the background and where to put the background. You can tell the computer to remember a point with the **command**: `CGPoint (x:,y:)`. Here, we are telling the computer to remember an x and a y; a point is what we call the x and y when together.  We describe the size of the background with the **command**: `CGSize (width:,height:)`. Here is how to create a `CGPoint` named `origin` and a `CGSize` named `size`.
@@ -25,6 +26,8 @@ var size = CGSize (width:700, height: 700)
         let size = CGSize (width:700, height: 700) //size
         
 /*:
+- Note:
+`origin` and `size` are both `variables`. A `variable` is a container for storing data.
 ## Framing the Background
 Now that we have the size and position of the screen we need to combine them into a frame object called a `CGRect`. This frame will store all of the information for the background in one place. A `CGRect` is created with the **command**: `CGRect (origin:,size:)`. Here is how you would make a `CGRect` called `frame`.
 ````
@@ -170,6 +173,7 @@ Write Code Below
                         action:#selector (self.showPattern (_:)))
         self.startBtn?.addGestureRecognizer (sb)
         self.startBtn?.isUserInteractionEnabled = true //allows it to be tapped.
+        self.loadPattern ()
     }
 /*:
  # Coding the Red Button
@@ -197,7 +201,7 @@ Write Code Below
             
 /*:
 ## Adding to an Array
-Now it's time to add the Tap to the input. All of the user inputs is to be stored in `self.input`. The object `self.input` is an `array` which is essentially an ordered list. The **command** to add a new Tap to the input is `self.input.append (Tap)`. Here is the **command** for adding Tap.Red to the input.
+Now it's time to add the Tap to the input. All of the user inputs is to be stored in `self.input`. The object `self.input` is an `array` which is essentially a list of `variables` which are called `elements`. The difference between `elements` and `variables` is that an `element` is part of an `array` and a `variable` exists without having to be part of an `array`. The **command** to add a new Tap to the input is `self.input.append (Tap)`. Here is the **command** for adding Tap.Red to the input.
 ````
 self.input.append (Tap.Red) 
 ````
@@ -206,34 +210,7 @@ Write Code Below
  */
             //add Tap.Red to the input array here
             
-/*:
-## Writing If-Statements
-For the last step we will need to tell the computer to use some logic. A computer can be instructed to run code only if a specified condition is **true** or **false**. We do this by making an *if-statement*, which looks like this.
-````
-if (condition) {
-    (code)
-} else {
-    (other code)
-}
-````
-For an *if-statement*, the *(code)* will be run *if* the *(condition)* is **true** and *(other code)* will be run *if* *(condition)* is **false**. This way a computer can change how it runs depending on the situation. Here is what an *if-statement* would look like that checks to see if enough inputs have been entered to warrant checking to see if the user entered the right pattern.
-````
-if self.input.count == self.pattern.count {
-    //code here
-}
-````
-Note how we can tell how many Taps have been input so far with the **command**: `self.input.count`. This can be done for all `arrays`(yes, this means `self.pattern` is also an `array`). We can tell if two `arrays` are equal with the **command**: `array1 == array2`.
- */
-            if self.input.count == self.pattern.count {
-/*:
-An *if-statement* needs to be written below. It should check if `self.input` and `self.pattern` are equal. If they are equal, the **command** `self.success ()` should be run, otherwise the **command** `self.fail ()` should be run.
-- Callout(Start Here):
-Write Code Below
- */
-                //write your if-statement here
-                
-                self.input = []//always clear input last
-            }
+            self.check () //this is step 3, you will code this later
         }
     }
 /*:
@@ -249,6 +226,8 @@ Write Code Below
 */
             //write the code for pressG here
             
+            
+            self.check ()
         }
     }
 /*:
@@ -264,6 +243,8 @@ Write Code Below
 */
             //write the code for pressB here
             
+            
+            self.check ()
         }
     }
 /*:
@@ -279,102 +260,135 @@ Write Code Below
 */
             //write the code for pressY here
             
+            
+            self.check ()
         }
     }
+/*:
+# Checking User Input
+This code will check if the user is inputting the correct pattern and prepare the next level if the correct pattern has been completely entered.
+*/
+    override func check () {
+/*:
+## Writing If-Statements
+For the last step we will need to tell the computer to use some logic. A computer can be instructed to run code only if a specified condition is **true** or **false**. We do this by making an *if-statement*, which looks like this.
+````
+if (condition) {
+(code)
+} else {
+(other code)
+}
+````
+For an *if-statement*, the *(code)* will be run *if* the *(condition)* is **true** and *(other code)* will be run *if* *(condition)* is **false**. The *else-statement* is what follows an *if-statement*. It contains the code that will be run if the *(condition)* is false and is optional. This way a computer can change how it runs depending on the situation. Here is what an *if-statement* would look like that checks to see if the last input entered is not the correct one.
+````
+if self.input[self.input.count-1] != self.pattern[self.input.count-1] {
+//code here
+} else {
+//other code
+}
+````
+- Note:
+`array[number]` is how you access an `element` in an `array`. Numbering in an `array` starts at 0. So if you want to access the first `element` in an `array` you would use the **command**: `array[0]`. If you want the 5th `element` in the `array` you would use the **command**: `arrray[4]`.
+\
+`array.count` gives you the number of `elements` in an `array`. 1 is subtracted from this number because counting in `arrays` starts at 0, not 1.
+- - -
+Inside this *if-statement* two things need to happen. 1: the **command** `self.fail()` should be run. 2: the input should be reset. The input is reset with the **command** `self.input = []`.
+````
+self.fail ()
+self.input = []
+````
+Next, We need to check if the entire pattern has been entered. This can be added to the previous *if-statement* inside the *else-statement* where *other code* is located. To check if the entire pattern has been entered, all that is you need to do is check if the input has the same number of `elements` as the pattern. This is done with the **command**: `self.input.count == self.pattern.count`.
+````
+if self.input.count == self.pattern.count {
+//code here
+}
+````
+Inside the *if-statement* above, the **command**: `self.success()` should be run. A new random tap should also be added to the pattern. This can be done with the **command**: `self.pattern.append (self.randomTap ())`. Lastly, the input needs to be reset, just like in the last *if-statement*.
+- Callout(Start Here):
+Write Code Below
+*/
+        //write an if-statement that checks if the just entered is incorrect
+        
+        //then write the code that should run if this condition is true
+        
+        //in the else-statement write another if-statement that checks if the correct pattern has beenentered
+        
+        //inside that if-statement, write the code that should be run if that condition is true
+        
+    }
+
 /*:
  # Coding the Start Button
 This code is run when the start button is pressed. It will display the loaded pattern and will not run if a pattern has not been loaded.
  */
     override func showPattern (_ recognizer: UITapGestureRecognizer) {
-        if self.pattern.isEmpty || !isDisplaying { return } //checks if pattern can be displayed.
-        if isWaiting { //no cheating
-            self.input = [] //clear input
+        if self.pattern.isEmpty && !isDisplaying { return } //checks if pattern can be displayed.
+        if isWaiting {
+            self.input = [] //no cheating
             isWaiting = false //stop user input
         }
         isDisplaying = true //we are now displaying pattern
 /*:
 ## Writing a For-loop
-Here is where the code for displaying `self.pattern` will be written. At this point, `self.pattern` is an `array` of Taps and we need to go through the array and tell the computer to animate them. We first need a way to go through everything in the `array`. This is done with a *for-loop*, which looks like this:
+Here is where the code for displaying `self.pattern` will be written. At this point, `self.pattern` is an `array` of Taps and we need to go through the array and tell the computer to animate them. We first need a way to go through each `element` in the `array`. This is done with a *for-loop*, which looks like this:
 ````
 for (name) in (array) {
     (code)
 }
 ````
-This tells the computer to run *(code)* once for each Tap in the `array`. In *(code)* we can reference the specific Tap in the `array` by `(name)`. Here is an example of a *for-loop* that will loop through the pattern.
+This tells the computer to run *(code)* once for `element` in the `array`. In *(code)* we can access the `element` by `(name)`. Here is an example of a *for-loop* that will loop through the pattern.
 ````
 for i in self.pattern {
 }
 ````
-Now we need a way to queue up each animation for the corresponding Tap. To add the animation to blink the red button we use the **command**: `addRedToQueue ()`. Just like with all the functions so far, there are counterparts for green, blue, and yellow button also. Fill out the code below.
+Now we need a way to queue up each animation for the corresponding Tap. To add the animation to blink the red button we use the **command**: `addRedToQueue ()`. There are **commands** like this for each of the green, blue, and yellow buttons. Below, write a *for-loop* that loops through `self.pattern`. Inside the *for-loop* you should write *if-statements* that queue up the corresponding animation. To queue up the red animation, the *if-statement* would look like this. 
+````
+if i == Tap.Red {
+    addRedToQueue () 
+}
+````
 - Callout(Start Here):
 Write Code Below
  */
-        for i in self.pattern { //loops through self.pattern
-            if i == Tap.Red {
-                //add code to add the animation for the red button to the queue
-                
-            }
-            if i == Tap.Green {
-                //add code to add the animation for the green button to the queue
-                
-            }
-            if i == Tap.Blue {
-                //add code to add the animation for the blue button to the queue
-                
-            }
-            if i == Tap.Yellow {
-                //add code to add the animation for the yellow button to the queue
-                
-            }
-        }//end of for-loop
-        startDisplayingPattern () //start to display the animations
+        //Write a for-loop that loops through pattern 
+        
+        //inside the for-loop, add if-statements to queue up the corresponding animation
+        
+        
+        
+        startDisplayingPattern () //start to display the animations after the for-loop
     }
 /*:
- # randomPattern
-This code will generate a random pattern of Taps. `length` is the number of Taps that will be randomly generated.
+ # Creating a Random Tap
+This code will generate a random Tap.
  */
-    override func randomPattern (_ length:Int) -> [Tap] {
-        var seq:[Tap] = []
+    override func randomTap () -> Tap {
+        var tap = Tap.Red
 /*:
-Here, you will be writing the code to generate a pattern of random Taps. Much like with looping through the pattern in the previous section, a *for-loop* will be used. A *for-loop* that runs a certain number of times can be written like this:
-````
-for i in lower...upper {// "{" starts the for-loop
-    (code)
-} // "}" ends the for-loop
-````
-Here, `lower...upper` is a `range`. A `range` is a list of numbers that can be looped through. The **command**: `1...5` would produce the `range` `[1, 2, 3, 4, 5]`. Here is an example of a *for-loop* that loops through the `range` `1...length`.
-````
-for i in 1...length {
-    (code)
-}
-````
-## Generating Random Numbers 
-There are often times when you need a random number. While true randomness is impossible, there are plently of ways to generate a pseudo-random number. Pseudo-random means that something is so close to being random that it can be treated as random. In Swift, a great way to generate a pseudo-random number is with the **command**:`arc4random_uniform (upper_bound)`. Here, `upper_bound` is 1 greater than the largest possible number that could be generated. Here is how you would make a random number betweeen 0 and 3.
+## Generating Random Numbers
+There are often times when you need a random number.  In Swift, a great way to generate a random number is with the **command**:`arc4random_uniform (upper_bound)`. Here, `upper_bound` is 1 greater than the largest possible number that could be generated. So if you want to generate a random number between 0 and 3 you would use the **command**: `arc4random_uniform (4)`.
 ````
 let n = arc4random_uniform (4) 
 ````
 If you want the number 0 to add Tap.Red to the pattern, the *if-statement* would look like the one below.
 ````
 if n == 0 {
-    seq.append (Tap.Red)
+    tap = Tap.Red
 }
 ````
-Here, you will write a *for-loop* that will loop `length` number of times. Inside the *for-loop* you will generate a random number between 0 and 3. After you generate a number, add the corresponding Tap to the pattern. I suggest 0 corresponds with Tap.Red, 1 with Tap.Green, 2 with Tap.Blue, and 3 with Tap.Yellow. 
+- Callout(Start Here):
+Write Code Below
  */
-        //write your loop here
+        //generate a random numbere here
         
+        //Assign tap using if-statements here
         
-        
-        //end your for-loop here
-        
-        return seq
+        return tap
     }
     
 }
 
 var simon = yourSimonController (page: PlaygroundPage.current)
-//let rseq = simon.randompattern (<pick a number>)
-//simon.loadpattern (seq:rseq)
 
 //Try out the game you just made!
 
