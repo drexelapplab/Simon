@@ -46,7 +46,7 @@ PlaygroundPage.current.liveView = background
         let background = UIView (frame: frame)//screen
         PlaygroundPage.current.liveView = background//show screen
 /*:
-Now that the `background` is made, we need to add the buttons. There is already space saved for the buttons. If you want to access this space with the **commands**: `self.red`, `self.green`, `self.blue`, and `self.yellow`. While the space for the buttons already exists, they still need to be created. Lets start by making origin points for each of the buttons.
+Now that the `background` is made, we need to add the buttons. There is already space saved for the buttons. You can access this space with the **commands**: `self.red`, `self.green`, `self.blue`, and `self.yellow`. While the space for the buttons already exists, they still need to be created. Lets start by making origin points for each of the buttons.
 ````
 let redOrigin
 let greenOrigin

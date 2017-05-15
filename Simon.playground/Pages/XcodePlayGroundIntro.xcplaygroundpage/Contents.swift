@@ -1,16 +1,9 @@
 
 /*:
 # Welcome
-- - -
  This tutorial will teach you how to use Xcode.
- \
- ![XcodeImage](XcodeImage.png)
- \
- **Xcode** is an **IDE**, which stands for **I**ntegrated **D**evelopment **E**nvironment. This means that Xcode is a single, convenient hub for your development and testing of code.
- \
- ![swiftImage](SwiftImage.png)
- \
- **Swift** is a general-purpose, multi-paradigm, compiled programming language developed by Apple for iOS, macOS, watchOS, tvOS, and Linux. This is the Language you will be using. 
+ - - -
+ **Xcode** is an **IDE**, which stands for **I**ntegrated **D**evelopment **E**nvironment. This means that Xcode is a single, convenient hub for your development and testing of code. **Swift** is a general-purpose, multi-paradigm, compiled programming language developed by Apple for iOS, macOS, watchOS, tvOS, and Linux. This is the Language you will be using.
  \
  ![IntroScreen](IntroScreen.png)
  \
@@ -23,7 +16,7 @@
  \
  ![Example_Code_Note](Example_Code_Note.png)
  \
- The **Example** section is for code examples.The **Note* section will contain key information. The space inbetween is an example of actual code.
+ The **Example** section is for code examples.The **Note** section will contain key information. The space inbetween is an example of actual code.
  \
  ![ExampleWriteCode](ExampleWriteCode.png)
  \
