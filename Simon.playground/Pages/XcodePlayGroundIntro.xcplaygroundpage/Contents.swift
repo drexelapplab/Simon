@@ -17,7 +17,7 @@
  This is how your Xcode screen should look. On the left is the **Navigation Panel** and will help you navigate through files and folders. On the right is the **Assistant Editor** and displays supporting files and views for your primary file. In the middle is the **Primary View** and is the primary file you are currently editing.
  \
  ![ViewSettings](ViewSettings.png)
- Make sure the settings in the top-right corner of the window looks like this.
+ Make sure the settings in the top-right corner of the window looks like this. If you do not see a split-screen try clicking ![circleSelect](circleSelect.png).
   ## Tutorial Guide
  Below are some examples of things you will see throughout the tutorial.
  \
