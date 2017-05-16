@@ -76,7 +76,7 @@ Now, all that's left is to make a `CGRect`/`UIView`s for each button and then di
 ````
 let redRect = CGRect (origin:redOrigin, size:buttonSize)
 self.red = UIView (frame:redRect)
-background (self.red!)
+background.addSubview (self.red!)
 ````
 - Callout(Start Here):
 Write Code Below
@@ -148,6 +148,7 @@ Now all that's left to do is make the start button. The start button is named `s
 let startBtnOrigin 
 let startBtnSize
 let startBtnRect
+self.startBtn = UILabel (frame:startBtnRect)
 background.addSubview (self.startBtn!)
 ````
 - Callout(Start Here):
